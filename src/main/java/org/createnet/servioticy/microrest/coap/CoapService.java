@@ -30,32 +30,21 @@ import org.slf4j.LoggerFactory;
 public class CoapService implements ServletContextListener
 {
 
-    //Run this before web application is started
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-        CoapService.getInstance().start();
+        this.start();
     }    
     
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
-        CoapService.getInstance().stop();
+        this.stop();
     }
 
     Logger logger = LoggerFactory.getLogger(CoapService.class);
     
     final protected CoapServer server;
-    static CoapService instance;
     
-    static public CoapService getInstance() {
-        
-        if(instance == null) {
-            instance = new CoapService();
-        }
-        
-        return instance;
-    }
-    
-    private CoapService() {
+    public CoapService() {
         
         logger.info("Initializing CoAP server");
         
